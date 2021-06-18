@@ -13,9 +13,7 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function () {
-    return view('guest.welcome');
-});
+// Rotte per AUTENTICAZIONE
 
 Auth::routes();
 
@@ -29,5 +27,12 @@ Route::prefix('admin')
     ->group(function () {
         // ROTTA HOME Admin
         Route::get('/', 'HomeController@index')->name('home');
+
         // ROTTE RESOURCE POSTS
+        Route::resource('/posts', 'PostController');
     });
+
+    // Front OFFICE
+    Route::get('{any?}', function () {
+    return view('guest.home');
+})->where("any", ".*");
