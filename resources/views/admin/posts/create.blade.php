@@ -40,6 +40,41 @@
                     @enderror
                 </div>
 
+                <div class="mb-3">
+                    <label for="category_id">Category</label>
+                    <select class="form-control @error('category_id')
+                        is-invalid
+                    @enderror" name="category_id" id="category_id">
+                        <option value="">-- Select category --</option>
+                        @foreach ($categories as $category)
+                            <option value="{{ $category->id}}" @if ($category->id == old('category_id')) selected @endif>{{ $category->name}}</option>
+                        @endforeach
+                    </select>
+                    @error('category_id')
+                        <div class="feedback">{{ $message }}</div>
+                    @enderror
+                </div>
+
+                {{-- TAGS --}}
+                <h4>TAGS</h4>
+                <div class="mb-3">
+                    @foreach ($tags as $tag)
+                        <span class="d-inline-block mr-3">
+                            <input type="checkbox" name="tags[]" id="tag{{ $loop->iteration }}"
+                                value="{{ $tag->id }}" 
+                                @if (in_array($tag->id, old('tags', []))) checked
+                                @endif
+                                >
+                                <label for="tag{{ $loop->iteration }}">
+                                    {{ $tag->name }}
+                                </label>
+                        </span>
+                    @endforeach
+                    @error('tags')
+                        <div>{{ $message }}</div>
+                    @enderror
+                </div>
+
                 <button class="btn btn-primary" type="submit">Create post</button>
                 </form>
             </div>

@@ -10,6 +10,19 @@ class Post extends Model
     protected $fillable = [ 
         'title',
         'slug',
-        'content'
+        'category_id',
+        'content'  
     ];
+
+    //Relazione con CATEGORIES
+        //posts - categories
+        public function category() {
+            return $this->belongsTo('App\Category');
+        }
+
+        // Relazione CON TAGS_TABLE_SEEDER
+        // posts - tags
+        public function tags() {
+            return $this->belongsToMany('App\Tag');
+        }
 }
