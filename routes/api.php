@@ -14,6 +14,21 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::middleware('auth:api')->get('/user', function (Request $request) {
-    return $request->user();
+// Route::middleware('auth:api')->get('/user', function (Request $request) {
+//     return $request->user();
+// });
+
+// TEST API
+Route::get('/test', function () {
+
+    return response()->json([
+        'names' => ['Matteo', 'Luca', 'Marco'],
+        'lorem' => 'ipsum'
+    ]);
 });
+
+// GET BLOG POSTS 
+Route::namespace('Api')->group(function() {
+    Route::get('/posts', 'PostController@index');
+});
+
