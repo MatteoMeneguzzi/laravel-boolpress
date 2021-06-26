@@ -29,6 +29,9 @@ Route::get('/test', function () {
 
 // GET BLOG POSTS 
 Route::namespace('Api')->group(function() {
+    // Get posts
     Route::get('/posts', 'PostController@index');
+
+    Route::get('posts/{slug}', 'PostController@show');
 });
 

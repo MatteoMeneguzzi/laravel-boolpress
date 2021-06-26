@@ -8,11 +8,20 @@ use App\Post;
 
 class PostController extends Controller
 {
-    //GET VLOG POSTS
+    //GET BLOG POSTS
     public function index() {
         // $posts = Post::all();
         $posts = Post::paginate(2);
 
         return response()->json($posts);
+    }
+
+    // GET POST DETAIL BY SLUG
+    public function show($slug) {
+        // dump($slug);
+
+        $post = Post::where('slug', $slug)->with(['category', 'tags'])->first();
+
+        return response()->json($post);
     }
 }
