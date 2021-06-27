@@ -29,7 +29,7 @@
                 v-show="pagination.current < pagination.last"
                 @click="getPosts(pagination.current + 1)"
             >
-                Prev
+                Next
             </button>
         </section>
     </div>
